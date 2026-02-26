@@ -4,24 +4,24 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
     android:padding="10dp"
-    android:background="#663399">
+    android:background="@color/purple">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product"
+        android:text="@string/screen_title_products"
         android:id="@+id/tv_name"
-        android:textColor="#ffff"
+        android:textColor="@color/white"
+        android:textSize="@dimen/screen_title"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Price"
+        android:text="@string/screen_title_price"
         android:id="@+id/tv_price"
-        android:textColor="#ffff"
+        android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:layout_below="@id/tv_name"
+        android:textSize="@dimen/screen_title"
         />
-
-
 </RelativeLayout>
