@@ -14,9 +14,18 @@ public class Product {
     @ColumnInfo(name = "product_price")
     public int productPrice;
 
-    public Product(String productName, int productPrice) {
+    public Product(int id, String productName, int productPrice) {
+        this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProductName() {

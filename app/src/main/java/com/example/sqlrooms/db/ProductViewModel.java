@@ -17,6 +17,7 @@ public class ProductViewModel extends AndroidViewModel {
         repository = new ProductRepository(application);
         allProducts = repository.getAllProducts();
     }
+
     public void insert(Product product){
         repository.insert(product);
     }
@@ -29,4 +30,5 @@ public class ProductViewModel extends AndroidViewModel {
     public LiveData<List<Product>> getAllProducts(){
         return allProducts;
     }
+
 }

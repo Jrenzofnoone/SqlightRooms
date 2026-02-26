@@ -48,7 +48,7 @@ public class AddingProduct extends AppCompatActivity {
         }
 
         int price = Integer.parseInt(productPrice);
-        Product user = new Product(productName, price);
+        Product user = new Product(0, productName, price);
         viewModel.insert(user);
         Toast.makeText(this, "Succesfully Added", Toast.LENGTH_SHORT).show();
         finish();
