@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">sqlrooms</string>
+    <string name="btn_add">Add</string>
+    <string name="screen_title">Products</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    <string name="price">Price</string>
+    <string name="screen_title_products">Products</string>
+    <string name="screen_title_price">Price</string>
 </resources>
