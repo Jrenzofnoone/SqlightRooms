@@ -4,9 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "products")
-public class Product {
+import java.io.Serializable;
 
+@Entity(tableName = "products")
+public class Product implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo(name = "product_name")

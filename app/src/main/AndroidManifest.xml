@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sqlrooms">
         <activity
+            android:name=".DisplayProduct"
+            android:exported="false" />
+        <activity
             android:name=".AddingProduct"
             android:exported="false" />
         <activity
