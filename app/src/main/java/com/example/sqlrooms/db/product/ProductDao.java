@@ -1,4 +1,4 @@
-package com.example.sqlrooms.db;
+package com.example.sqlrooms.db.product;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -21,6 +21,6 @@ public interface ProductDao {
     @Delete
     void delete(Product product);
 
-    @Query("SELECT * FROM products ORDER BY id DESC")
-    LiveData<List<Product>> getallProducts();
+    @Query("SELECT * FROM products WHERE user_id = :userId")
+    LiveData<List<Product>> getallProducts(int userId);
 }

@@ -12,13 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sqlrooms">
         <activity
+            android:name=".SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".DisplayProduct"
             android:exported="false" />
         <activity
             android:name=".AddingProduct"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

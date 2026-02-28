@@ -1,12 +1,21 @@
-package com.example.sqlrooms.db;
+package com.example.sqlrooms.db.product;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.sqlrooms.db.user.User;
 
 import java.io.Serializable;
 
-@Entity(tableName = "products")
+@Entity(tableName = "products",
+foreignKeys = @ForeignKey(
+        entity = User.class,
+        parentColumns = "id",
+        childColumns = "userId",
+        onDelete = ForeignKey.CASCADE
+))
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,11 +25,22 @@ public class Product implements Serializable {
     public String productName;
     @ColumnInfo(name = "product_price")
     public int productPrice;
+    @ColumnInfo(name = "user_id")
+    public int userId;
 
-    public Product(int id, String productName, int productPrice) {
+    public Product(int id, String productName, int productPrice, int userId) {
         this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getId() {

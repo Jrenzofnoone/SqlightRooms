@@ -10,10 +10,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.sqlrooms.db.Product;
+import com.example.sqlrooms.db.product.Product;
 
 public class DisplayProduct extends AppCompatActivity {
-    TextView tv_name, tv_price;
+    TextView tv_name, tv_price, tv_id;
     Product product;
 
     @Override
@@ -28,13 +28,15 @@ public class DisplayProduct extends AppCompatActivity {
         });
         tv_name = findViewById(R.id.tv_name);
         tv_price = findViewById(R.id.tv_price);
+        tv_id = findViewById(R.id.tv_id);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             product = getIntent().getSerializableExtra("product_data", Product.class);
         } else {
             product = (Product) getIntent().getSerializableExtra("product_data");
         }
-        tv_name.setText(product.getProductName());
-        tv_price.setText(String.valueOf(product.getProductPrice()));
+        tv_id.setText(String.valueOf(product.getId()));
+        tv_name.setText("Product Name: "+product.getProductName());
+        tv_price.setText("Product Price" + String.valueOf(product.getProductPrice()));
 
 
     }

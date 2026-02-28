@@ -1,5 +1,6 @@
 package com.example.sqlrooms;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.sqlrooms.db.Product;
-import com.example.sqlrooms.db.ProductViewModel;
+import com.example.sqlrooms.db.product.Product;
+import com.example.sqlrooms.db.product.ProductViewModel;
 
 public class AddingProduct extends AppCompatActivity {
     private EditText et_name, et_price;
@@ -47,8 +48,11 @@ public class AddingProduct extends AppCompatActivity {
             return;
         }
 
+        SharedPreferences pref = getSharedPreferences("session", MODE_PRIVATE);
+        int userId = pref.getInt("userId", -1);
+
         int price = Integer.parseInt(productPrice);
-        Product user = new Product(0, productName, price);
+        Product user = new Product(0, productName, price, userId);
         viewModel.insert(user);
         Toast.makeText(this, "Succesfully Added", Toast.LENGTH_SHORT).show();
         finish();

@@ -1,6 +1,7 @@
 package com.example.sqlrooms;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -13,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sqlrooms.db.ProductViewModel;
+import com.example.sqlrooms.db.product.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
         rv_products.setLayoutManager(new LinearLayoutManager(this));
         rv_products.setAdapter(rv_adapter);
 
-        viewModel.getAllProducts().observe(this, products -> {
+        SharedPreferences pref = getSharedPreferences("session", MODE_PRIVATE);
+        int userId = pref.getInt("userId", -1);
+
+        viewModel.getAllProducts(userId).observe(this, products -> {
             rv_adapter.setProducts(products);
         });
 
