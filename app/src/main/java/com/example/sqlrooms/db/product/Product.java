@@ -13,7 +13,7 @@ import java.io.Serializable;
 foreignKeys = @ForeignKey(
         entity = User.class,
         parentColumns = "id",
-        childColumns = "userId",
+        childColumns = "user_id",
         onDelete = ForeignKey.CASCADE
 ))
 public class Product implements Serializable {

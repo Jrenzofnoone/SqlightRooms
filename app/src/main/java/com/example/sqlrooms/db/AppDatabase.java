@@ -11,7 +11,7 @@ import com.example.sqlrooms.db.product.ProductDao;
 import com.example.sqlrooms.db.user.User;
 import com.example.sqlrooms.db.user.UserDao;
 
-@Database(entities = {Product.class, User.class}, version = 2)
+@Database(entities = {Product.class, User.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
@@ -28,7 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             AppDatabase.class,
                             "app_database"
-                    ).build();
+                    ).fallbackToDestructiveMigration().build();
                 }
             }
         }
