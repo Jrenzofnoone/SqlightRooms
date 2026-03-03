@@ -21,6 +21,6 @@ public interface ProductDao {
     @Delete
     void delete(Product product);
 
-    @Query("SELECT * FROM products WHERE user_id = :userId")
-    LiveData<List<Product>> getallProducts(int userId);
+    @Query("SELECT * FROM products WHERE user_id = :userId AND product_name LIKE :query ORDER BY id DESC")
+    LiveData<List<Product>> getallProducts(int userId, String query);
 }

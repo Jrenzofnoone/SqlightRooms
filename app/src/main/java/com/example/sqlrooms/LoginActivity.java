@@ -13,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.sqlrooms.db.user.User;
 import com.example.sqlrooms.db.user.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,14 +55,19 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        userViewModel.login(email, password, user -> {
-            if (user != null) {
-                SharedPreferences pref = getSharedPreferences("session", MODE_PRIVATE);
-                pref.edit().putInt("userId", user.getId()).apply();
-                Toast.makeText(this, "Successfully login", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MainActivity.class));
-            } else {
-                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+        LiveData<User> liveData = userViewModel.login(email, password);
+        liveData.observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                liveData.removeObserver(this);
+                if (user != null){
+                    SharedPreferences prefs = getSharedPreferences("session", MODE_PRIVATE);
+                    prefs.edit().putInt("userId",user.getId()).apply();
+                    Toast.makeText(LoginActivity.this, "Succesfully log in", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

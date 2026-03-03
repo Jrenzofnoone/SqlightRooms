@@ -32,16 +32,9 @@ public class UserRepository {
     public void delete(User user){
         executorService.execute( () -> userDao.delete(user));
     }
-    public void login(String email, String password, LoginCallBack callBack){
-        executorService.execute(() -> {
-            User user = userDao.login(email, password);
-            new Handler(Looper.getMainLooper()).post(() -> {
-                callBack.onResult(user);
-            });
-        });
+    public LiveData<User> login(String email, String password){
+        return userDao.login(email, password);
     }
     public LiveData<List<User>> getAllUsers() {return getAllUsers;}
-    public interface LoginCallBack {
-        void onResult(User user);
-    }
+
 }

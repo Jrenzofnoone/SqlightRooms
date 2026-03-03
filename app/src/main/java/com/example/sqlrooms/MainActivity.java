@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,12 +20,10 @@ import com.example.sqlrooms.db.product.ProductViewModel;
 public class MainActivity extends AppCompatActivity {
 
     private Button btn_add;
-
     private RecyclerView rv_products;
-
     private product_rvAdapter rv_adapter;
-
     private ProductViewModel viewModel;
+    private SearchView sv_searchprod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         btn_add = findViewById(R.id.btn_add);
+        sv_searchprod = findViewById(R.id.sv_searchprod);
         rv_products = findViewById(R.id.rv_products);
         viewModel = new ViewModelProvider(this).get(ProductViewModel.class);
         rv_adapter = new product_rvAdapter();
@@ -47,13 +48,31 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("session", MODE_PRIVATE);
         int userId = pref.getInt("userId", -1);
 
-        viewModel.getAllProducts(userId).observe(this, products -> {
-            rv_adapter.setProducts(products);
-        });
+        loadProducts(userId, "");
 
+        sv_searchprod.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadProducts(userId, query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                loadProducts(userId, newText);
+                return true;
+            }
+        });
         btn_add.setOnClickListener(v -> {
             Intent i = new Intent(this, AddingProduct.class);
             startActivity(i);
+        });
+    }
+
+    private void loadProducts(int userId, String query) {
+        String searchQuery = "%" + query + "%";
+        viewModel.getAllProducts(userId, searchQuery).observe(this, products -> {
+            rv_adapter.setProducts(products);
         });
     }
 }

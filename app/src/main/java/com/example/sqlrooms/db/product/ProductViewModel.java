@@ -25,8 +25,8 @@ public class ProductViewModel extends AndroidViewModel {
     public void delete(Product product){
         repository.delete(product);
     }
-    public LiveData<List<Product>> getAllProducts(int userId){
-        return repository.getAllProducts(userId);
+    public LiveData<List<Product>> getAllProducts(int userId, String query){
+        return repository.getAllProducts(userId, query);
     }
 
 }

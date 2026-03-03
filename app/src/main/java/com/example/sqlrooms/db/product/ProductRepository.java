@@ -30,7 +30,7 @@ public class ProductRepository {
     public void delete(Product product){
         executorService.execute(() -> productDao.delete(product));
     }
-    public LiveData<List<Product>> getAllProducts(int userId){
-        return productDao.getallProducts(userId);
+    public LiveData<List<Product>> getAllProducts(int userId, String query){
+        return productDao.getallProducts(userId, query);
     }
 }

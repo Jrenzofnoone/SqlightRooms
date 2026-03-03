@@ -20,5 +20,5 @@ public interface UserDao {
     @Query("SELECT * FROM users ORDER BY id DESC")
     LiveData<List<User>> getAllUsers();
     @Query("SELECT * FROM users WHERE email =:email AND password = :password")
-    User login(String email, String password);
+    LiveData<User> login(String email, String password);
 }

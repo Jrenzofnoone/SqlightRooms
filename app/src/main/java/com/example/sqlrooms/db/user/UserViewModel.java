@@ -27,8 +27,8 @@ public class UserViewModel extends AndroidViewModel {
     public void delete(User user){
         userRepository.delete(user);
     }
-    public void login(String email, String password, UserRepository.LoginCallBack callBack){
-        userRepository.login(email, password, callBack);
+    public LiveData<User> login(String email, String password){
+        return userRepository.login(email, password);
     }
     public LiveData<List<User>> getAllUsers() {return getAllUsers;}
 }
